@@ -1,3 +1,5 @@
+using System.Data.SqlClient;
+using Dapper;
 using Microsoft.Extensions.Logging;
 
 namespace MultiTenant.WebApi.Data
@@ -18,6 +20,10 @@ namespace MultiTenant.WebApi.Data
             using (logger.BeginScope($"[tenant] {tenantContext.ConnectionString}"))
             {
                 logger.LogInformation("chegou no add!!!");
+
+                using var connection = new SqlConnection(tenantContext.ConnectionString);
+                var data = connection.Query("SELECT * FROM TABLE");
+
                 //
                 //
             }
